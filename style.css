@@ -436,104 +436,59 @@ section#contact::before {
     margin-bottom: 0;
 }
 
-/* About Row (text + photo side by side) */
 .about-row {
     display: grid;
-    grid-template-columns: 1fr 280px;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
     gap: 48px;
+    align-items: start;
 }
 
-.about-photo {
+.about-left {
     display: flex;
     flex-direction: column;
 }
 
-.about-photo-img {
-    flex: 1;
-    background: url('assets/diploma.jpg') top / cover no-repeat;
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.about-photo-caption {
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    font-style: italic;
-    opacity: 0.7;
-    margin-top: 12px;
-}
-
-/* PhD Defense banner */
-.defense-photo {
-    margin: 56px auto 0;
-    max-width: 900px;
-}
-
-.defense-photo-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-
-.defense-photo img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 4 / 3;
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.defense-photo figcaption {
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    font-style: italic;
-    opacity: 0.7;
-    margin-top: 12px;
-}
-
-/* Education Timeline */
+/* Education Timeline (vertical) */
 .timeline {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    margin: 64px auto 48px;
-    max-width: 900px;
     position: relative;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 12%;
-    right: 12%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent-dim), var(--accent), var(--accent-dim));
+    margin: 0;
+    padding-left: 8px;
 }
 
 .timeline-item {
-    flex: 1;
-    text-align: center;
     position: relative;
-    padding-top: 32px;
+    padding-left: 40px;
+    padding-bottom: 48px;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+/* connecting rail between dots */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 8px;
+    bottom: -8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-dim));
+}
+
+.timeline-item:last-child::before {
+    display: none;
 }
 
 .timeline-dot {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: var(--bg-primary);
     border: 2px solid var(--accent);
     position: absolute;
+    left: 0;
     top: 4px;
-    left: 50%;
-    transform: translateX(-50%);
     z-index: 1;
 }
 
@@ -544,14 +499,14 @@ section#contact::before {
 
 .timeline-content h4 {
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 2px;
 }
 
 .timeline-content p {
     color: var(--text-secondary);
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     margin-bottom: 4px;
 }
 
@@ -564,41 +519,310 @@ section#contact::before {
 }
 
 .timeline-detail {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
     opacity: 0.7;
+    display: block;
 }
 
-/* Honors */
-.honors {
+/* Photo milestones: head top-left, caption bottom-left, photo on the right */
+.timeline-item--media-right .timeline-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "head  media"
+        "cap   media";
+    column-gap: 20px;
+    align-items: start;
+}
+
+.timeline-item--media-right .timeline-head {
+    grid-area: head;
+    min-width: 0;
+}
+
+/* figure becomes layout-transparent so its img + caption drop into the grid */
+.timeline-item--media-right .timeline-media {
+    display: contents;
+}
+
+.timeline-item--media-right .timeline-media img {
+    grid-area: media;
+    align-self: start;
+    width: 160px;
+    max-height: none;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s ease;
+}
+
+/* caption sits under the text and only fades in on hover */
+.timeline-item--media-right .timeline-media figcaption {
+    grid-area: cap;
+    margin: 10px 0 0;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+/* Hover enlarges by growing in size, pushing the timeline down (no overlap) */
+@media (hover: hover) {
+    .timeline-item--media-right .timeline-media img:hover {
+        width: 270px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .timeline-item--media-right .timeline-media img:hover ~ figcaption {
+        opacity: 0.75;
+        transform: translateY(0);
+    }
+}
+
+/* Logo beside a milestone (e.g. UC San Diego) */
+.timeline-item--logo-right .timeline-content {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 48px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.honor-tag {
+.timeline-item--logo-right .timeline-head {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.timeline-logo {
+    flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 18px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    transition: border-color var(--transition), color var(--transition);
+    padding: 14px 18px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-.honor-tag:hover {
+.timeline-logo img {
+    display: block;
+    width: 150px;
+    height: auto;
+}
+
+/* Ph.D. milestone: photo to the right of the text, video + photo below */
+.timeline-content--phd {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "head   side"
+        "cap    side"
+        "bottom bottom";
+    column-gap: 20px;
+    align-items: start;
+}
+
+.timeline-content--phd .timeline-head {
+    grid-area: head;
+}
+
+/* side figure is layout-transparent: img + caption drop into the grid */
+.timeline-media--phd-side {
+    display: contents;
+}
+
+.timeline-media--phd-side img {
+    grid-area: side;
+    align-self: start;
+    width: 160px;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s ease;
+}
+
+.timeline-content--phd .timeline-media--phd-side figcaption {
+    grid-area: cap;
+    margin: 10px 0 0;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+@media (hover: hover) {
+    .timeline-media--phd-side img:hover {
+        width: 270px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .timeline-media--phd-side img:hover ~ figcaption {
+        opacity: 0.75;
+        transform: translateY(0);
+    }
+}
+
+.timeline-media--phd-bottom {
+    grid-area: bottom;
+}
+
+.timeline-media--phd-bottom video {
+    width: 100%;
+    height: auto;
+}
+
+/* Inline timeline media (always visible) */
+.timeline-media {
+    margin: 16px 0 0;
+}
+
+.timeline-media img,
+.timeline-media video {
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    background: #08111f;
+}
+
+.timeline-media img,
+.timeline-media video {
+    cursor: pointer;
+}
+
+.timeline-media--portrait img {
+    width: auto;
+    max-width: 100%;
+    max-height: 340px;
+}
+
+.timeline-media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.timeline-media-grid video {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 10;
+}
+
+.timeline-media-grid img,
+.timeline-media-grid video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.timeline-media-grid img {
+    aspect-ratio: 4 / 3;
+}
+
+.timeline-media figcaption {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.7;
+    margin-top: 10px;
+}
+
+.timeline-pdf-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 4px 12px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid transparent;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: border-color var(--transition), background var(--transition);
+    position: relative;
+    z-index: 6;
+}
+
+.timeline-pdf-link:hover,
+.timeline-pdf-link:focus-visible {
+    border-color: var(--accent);
+}
+
+.timeline-pdf-link i {
+    font-size: 0.85rem;
+}
+
+/* Honors (expandable) */
+.honors {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 32px;
+}
+
+.honor {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color var(--transition);
+}
+
+.honor[open],
+.honor:hover {
     border-color: var(--border-hover);
+}
+
+.honor summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    transition: color var(--transition);
+}
+
+.honor summary::-webkit-details-marker {
+    display: none;
+}
+
+.honor summary:hover {
     color: var(--text-primary);
 }
 
-.honor-tag i {
+.honor summary > .fa-award {
     color: var(--accent);
     font-size: 0.8rem;
+}
+
+.honor-title {
+    flex: 1;
+}
+
+.honor-chevron {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    transition: transform 0.25s ease;
+}
+
+.honor[open] .honor-chevron {
+    transform: rotate(180deg);
+}
+
+.honor-desc {
+    margin: 0;
+    padding: 0 16px 14px 38px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    opacity: 0.85;
 }
 
 /* --- Research Section --- */
@@ -1015,57 +1239,63 @@ footer p {
     /* About */
     .about-row {
         grid-template-columns: 1fr;
-    }
-
-    .about-photo {
-        max-width: 280px;
-        margin: 0 auto;
-    }
-
-    .about-photo-img {
-        min-height: 360px;
-    }
-
-    .defense-photo-grid {
-        grid-template-columns: 1fr;
+        gap: 40px;
     }
 
     .about-content p {
         font-size: 1rem;
     }
 
-    /* Timeline vertical */
-    .timeline {
-        flex-direction: column;
-        gap: 0;
-        padding-left: 24px;
-        margin: 48px auto 40px;
+    /* Timeline media stacks on small screens */
+    .timeline-media-grid {
+        grid-template-columns: 1fr;
     }
 
-    .timeline::before {
-        top: 0;
-        bottom: 0;
-        left: 29px;
-        right: auto;
-        width: 2px;
-        height: 100%;
+    .timeline-media-grid video {
+        aspect-ratio: 16 / 10;
     }
 
-    .timeline-item {
-        padding-top: 0;
-        padding-left: 32px;
-        padding-bottom: 32px;
-        text-align: left;
+    /* Photo milestones stack on small screens; captions always shown */
+    .timeline-item--media-right .timeline-content {
+        display: block;
     }
 
-    .timeline-item:last-child {
-        padding-bottom: 0;
+    .timeline-item--media-right .timeline-media img {
+        width: 100%;
+        max-width: 280px;
+        margin-top: 16px;
     }
 
-    .timeline-dot {
-        top: 4px;
-        left: 0;
+    .timeline-item--media-right .timeline-media figcaption {
+        opacity: 0.75;
         transform: none;
+        margin-top: 8px;
+    }
+
+    /* Ph.D. milestone stacks on small screens */
+    .timeline-content--phd {
+        display: block;
+    }
+
+    .timeline-media--phd-side img {
+        width: 100%;
+        max-width: 280px;
+        margin-top: 16px;
+    }
+
+    .timeline-media--phd-side figcaption {
+        opacity: 0.75;
+        transform: none;
+        margin-top: 8px;
+    }
+
+    /* Logo milestone stacks on small screens */
+    .timeline-item--logo-right .timeline-content {
+        display: block;
+    }
+
+    .timeline-item--logo-right .timeline-logo {
+        margin-top: 16px;
     }
 
     /* Research grid */
@@ -1117,4 +1347,79 @@ footer p {
         font-size: 0.78rem;
         padding: 6px 14px;
     }
+}
+
+/* --- Image Lightbox --- */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(5, 9, 18, 0.92);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.lightbox.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.lightbox-content img,
+.lightbox-content video {
+    max-width: 90vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-content img[hidden],
+.lightbox-content video[hidden] {
+    display: none;
+}
+
+.lightbox-caption {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-style: italic;
+    text-align: center;
+    max-width: 600px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.4rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: opacity var(--transition);
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus-visible {
+    opacity: 1;
 }

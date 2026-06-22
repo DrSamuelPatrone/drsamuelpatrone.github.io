@@ -178,6 +178,89 @@ document.addEventListener('DOMContentLoaded', function () {
         statsObserver.observe(stat);
     });
 
+    // --- Lightbox for timeline media (images + video) ---
+    var lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        var lbImg = document.getElementById('lightboxImg');
+        var lbVideo = document.getElementById('lightboxVideo');
+        var lbCaption = document.getElementById('lightboxCaption');
+        var lbClose = document.getElementById('lightboxClose');
+
+        function showLightbox(caption) {
+            lbCaption.textContent = caption || '';
+            lightbox.classList.add('open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openImage(img) {
+            lbVideo.pause();
+            lbVideo.hidden = true;
+            lbImg.hidden = false;
+            lbImg.src = img.currentSrc || img.src;
+            lbImg.alt = img.alt;
+            showLightbox(img.alt);
+        }
+
+        function openVideo(caption) {
+            lbImg.hidden = true;
+            lbImg.removeAttribute('src');
+            lbVideo.hidden = false;
+            showLightbox(caption);
+            lbVideo.currentTime = 0;
+            var p = lbVideo.play();
+            if (p && typeof p.catch === 'function') p.catch(function () {});
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            lbVideo.pause();
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.timeline-media img').forEach(function (img) {
+            img.setAttribute('tabindex', '0');
+            img.setAttribute('role', 'button');
+            img.addEventListener('click', function () {
+                openImage(img);
+            });
+            img.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openImage(img);
+                }
+            });
+        });
+
+        document.querySelectorAll('.timeline-media video').forEach(function (video) {
+            video.setAttribute('tabindex', '0');
+            video.setAttribute('role', 'button');
+            var fig = video.closest('figure');
+            var cap = fig && fig.querySelector('figcaption');
+            var capText = cap ? cap.textContent.trim() : '';
+            video.addEventListener('click', function () {
+                openVideo(capText);
+            });
+            video.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openVideo(capText);
+                }
+            });
+        });
+
+        lbClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function (e) {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+                closeLightbox();
+            }
+        });
+    }
+
     function animateCounter(el) {
         var text = el.textContent.trim();
         var suffix = text.replace(/[0-9]/g, '');
