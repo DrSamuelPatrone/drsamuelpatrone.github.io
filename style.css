@@ -609,8 +609,9 @@ section#contact::before {
     height: auto;
 }
 
-/* Ph.D. milestone: photo to the right of the text, video + photo below */
-.timeline-content--phd {
+/* Milestone with a photo beside the text and a video/photo below (Ph.D., B.Sc.) */
+.timeline-content--phd,
+.timeline-content--bsc {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
@@ -621,16 +622,19 @@ section#contact::before {
     align-items: start;
 }
 
-.timeline-content--phd .timeline-head {
+.timeline-content--phd .timeline-head,
+.timeline-content--bsc .timeline-head {
     grid-area: head;
 }
 
 /* side figure is layout-transparent: img + caption drop into the grid */
-.timeline-media--phd-side {
+.timeline-media--phd-side,
+.timeline-media--bsc-side {
     display: contents;
 }
 
-.timeline-media--phd-side img {
+.timeline-media--phd-side img,
+.timeline-media--bsc-side img {
     grid-area: side;
     align-self: start;
     width: 160px;
@@ -641,7 +645,8 @@ section#contact::before {
         box-shadow 0.4s ease;
 }
 
-.timeline-content--phd .timeline-media--phd-side figcaption {
+.timeline-content--phd .timeline-media--phd-side figcaption,
+.timeline-content--bsc .timeline-media--bsc-side figcaption {
     grid-area: cap;
     margin: 10px 0 0;
     opacity: 0;
@@ -651,22 +656,26 @@ section#contact::before {
 }
 
 @media (hover: hover) {
-    .timeline-media--phd-side img:hover {
+    .timeline-media--phd-side img:hover,
+    .timeline-media--bsc-side img:hover {
         width: 270px;
         box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
 
-    .timeline-media--phd-side img:hover ~ figcaption {
+    .timeline-media--phd-side img:hover ~ figcaption,
+    .timeline-media--bsc-side img:hover ~ figcaption {
         opacity: 0.75;
         transform: translateY(0);
     }
 }
 
-.timeline-media--phd-bottom {
+.timeline-media--phd-bottom,
+.timeline-media--bsc-bottom {
     grid-area: bottom;
 }
 
-.timeline-media--phd-bottom video {
+.timeline-media--phd-bottom video,
+.timeline-media--bsc-bottom video {
     width: 100%;
     height: auto;
 }
@@ -1272,18 +1281,21 @@ footer p {
         margin-top: 8px;
     }
 
-    /* Ph.D. milestone stacks on small screens */
-    .timeline-content--phd {
+    /* Ph.D. / B.Sc. milestones stack on small screens */
+    .timeline-content--phd,
+    .timeline-content--bsc {
         display: block;
     }
 
-    .timeline-media--phd-side img {
+    .timeline-media--phd-side img,
+    .timeline-media--bsc-side img {
         width: 100%;
         max-width: 280px;
         margin-top: 16px;
     }
 
-    .timeline-media--phd-side figcaption {
+    .timeline-media--phd-side figcaption,
+    .timeline-media--bsc-side figcaption {
         opacity: 0.75;
         transform: none;
         margin-top: 8px;

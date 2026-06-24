@@ -202,10 +202,16 @@ document.addEventListener('DOMContentLoaded', function () {
             showLightbox(img.alt);
         }
 
-        function openVideo(caption) {
+        function openVideo(video, caption) {
             lbImg.hidden = true;
             lbImg.removeAttribute('src');
             lbVideo.hidden = false;
+            // Mirror the clicked video's sources so the lightbox plays the right clip.
+            while (lbVideo.firstChild) lbVideo.removeChild(lbVideo.firstChild);
+            video.querySelectorAll('source').forEach(function (src) {
+                lbVideo.appendChild(src.cloneNode(true));
+            });
+            lbVideo.load();
             showLightbox(caption);
             lbVideo.currentTime = 0;
             var p = lbVideo.play();
@@ -240,12 +246,12 @@ document.addEventListener('DOMContentLoaded', function () {
             var cap = fig && fig.querySelector('figcaption');
             var capText = cap ? cap.textContent.trim() : '';
             video.addEventListener('click', function () {
-                openVideo(capText);
+                openVideo(video, capText);
             });
             video.addEventListener('keydown', function (e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    openVideo(capText);
+                    openVideo(video, capText);
                 }
             });
         });
