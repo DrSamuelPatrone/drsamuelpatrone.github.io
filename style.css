@@ -525,38 +525,26 @@ section#contact::before {
     display: block;
 }
 
-/* Photo milestones: head top-left, caption bottom-left, photo on the right */
-.timeline-item--media-right .timeline-content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas:
-        "head  media"
-        "cap   media";
-    column-gap: 20px;
-    align-items: start;
-}
-
-.timeline-item--media-right .timeline-head {
-    grid-area: head;
-    min-width: 0;
-}
-
-/* figure sits in the grid's "media" column */
+/* Photo milestones: photo floats right, text wraps around it */
 .timeline-item--media-right .timeline-media {
-    grid-area: media;
-    align-self: start;
+    float: right;
+    margin: 0 0 12px 16px;
+}
+
+.timeline-item--media-right .timeline-content::after {
+    content: '';
+    display: table;
+    clear: both;
 }
 
 .timeline-item--media-right .timeline-media img {
     width: 120px;
-    max-height: none;
     aspect-ratio: 3 / 4;
     object-fit: cover;
     transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 0.4s ease;
 }
 
-/* caption sits under the image and only fades in on hover */
 .timeline-item--media-right .timeline-media figcaption {
     margin: 10px 0 0;
     opacity: 0;
@@ -565,10 +553,9 @@ section#contact::before {
     pointer-events: none;
 }
 
-/* Hover enlarges by growing in size, pushing the timeline down (no overlap) */
 @media (hover: hover) {
     .timeline-item--media-right .timeline-media img:hover {
-        width: 200px;
+        width: 180px;
         box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
 
@@ -607,29 +594,18 @@ section#contact::before {
     height: auto;
 }
 
-/* Milestone with a photo beside the text and a video/photo below (Ph.D., B.Sc.) */
-.timeline-content--phd,
-.timeline-content--bsc {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas:
-        "head   side"
-        "cap    side"
-        "bottom bottom";
-    column-gap: 20px;
-    align-items: start;
-}
-
-.timeline-content--phd .timeline-head,
-.timeline-content--bsc .timeline-head {
-    grid-area: head;
-}
-
-/* side figure sits in the grid's "side" column */
+/* Milestone with a photo beside the text and a video below (Ph.D., B.Sc.) */
 .timeline-media--phd-side,
 .timeline-media--bsc-side {
-    grid-area: side;
-    align-self: start;
+    float: right;
+    margin: 0 0 12px 16px;
+}
+
+.timeline-content--phd::after,
+.timeline-content--bsc::after {
+    content: '';
+    display: table;
+    clear: both;
 }
 
 .timeline-media--phd-side img,
@@ -642,8 +618,8 @@ section#contact::before {
         box-shadow 0.4s ease;
 }
 
-.timeline-content--phd .timeline-media--phd-side figcaption,
-.timeline-content--bsc .timeline-media--bsc-side figcaption {
+.timeline-media--phd-side figcaption,
+.timeline-media--bsc-side figcaption {
     margin: 10px 0 0;
     opacity: 0;
     transform: translateY(-4px);
@@ -654,7 +630,7 @@ section#contact::before {
 @media (hover: hover) {
     .timeline-media--phd-side img:hover,
     .timeline-media--bsc-side img:hover {
-        width: 200px;
+        width: 180px;
         box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
 
@@ -667,7 +643,7 @@ section#contact::before {
 
 .timeline-media--phd-bottom,
 .timeline-media--bsc-bottom {
-    grid-area: bottom;
+    clear: both;
 }
 
 .timeline-media--phd-bottom video,
@@ -1261,21 +1237,14 @@ footer p {
     }
 
     /* Photo milestones stack on small screens; captions always shown */
-    .timeline-item--media-right .timeline-content {
-        display: block;
-    }
-
     .timeline-item--media-right .timeline-media {
-        display: block;
-        grid-area: auto;
-        align-self: auto;
-        width: 100%;
+        float: none;
+        margin: 16px 0 0;
     }
 
     .timeline-item--media-right .timeline-media img {
         width: 100%;
         max-width: 280px;
-        margin-top: 16px;
         aspect-ratio: auto;
     }
 
@@ -1286,24 +1255,16 @@ footer p {
     }
 
     /* Ph.D. / B.Sc. milestones stack on small screens */
-    .timeline-content--phd,
-    .timeline-content--bsc {
-        display: block;
-    }
-
     .timeline-media--phd-side,
     .timeline-media--bsc-side {
-        display: block;
-        grid-area: auto;
-        align-self: auto;
-        width: 100%;
+        float: none;
+        margin: 16px 0 0;
     }
 
     .timeline-media--phd-side img,
     .timeline-media--bsc-side img {
         width: 100%;
         max-width: 280px;
-        margin-top: 16px;
         aspect-ratio: auto;
     }
 
