@@ -624,6 +624,18 @@ section#contact::before {
     align-self: start;
 }
 
+.timeline-content--phd .timeline-year,
+.timeline-content--bsc .timeline-year {
+    display: inline;
+    margin-bottom: 0;
+    margin-right: 8px;
+}
+
+.timeline-content--phd .timeline-head h4,
+.timeline-content--bsc .timeline-head h4 {
+    display: inline;
+}
+
 .timeline-media--phd-side,
 .timeline-media--bsc-side {
     grid-area: side;
@@ -640,13 +652,14 @@ section#contact::before {
         box-shadow 0.4s ease;
 }
 
-.timeline-media--phd-side figcaption,
-.timeline-media--bsc-side figcaption {
+.timeline-media.timeline-media--phd-side figcaption,
+.timeline-media.timeline-media--bsc-side figcaption {
     margin: 8px 0 0;
     opacity: 0;
     transform: translateY(-4px);
     transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
+    width: 110px;
 }
 
 @media (hover: hover) {
@@ -1266,8 +1279,8 @@ footer p {
 
     /* Captions always visible on small screens */
     .timeline-item--media-right .timeline-media figcaption,
-    .timeline-media--phd-side figcaption,
-    .timeline-media--bsc-side figcaption {
+    .timeline-media.timeline-media--phd-side figcaption,
+    .timeline-media.timeline-media--bsc-side figcaption {
         opacity: 0.75;
         transform: none;
     }
