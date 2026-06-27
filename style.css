@@ -1236,38 +1236,8 @@ footer p {
         aspect-ratio: 16 / 10;
     }
 
-    /* Photo milestones stack on small screens; captions always shown */
-    .timeline-item--media-right .timeline-media {
-        float: none;
-        margin: 16px 0 0;
-    }
-
-    .timeline-item--media-right .timeline-media img {
-        width: 100%;
-        max-width: 280px;
-        aspect-ratio: auto;
-    }
-
-    .timeline-item--media-right .timeline-media figcaption {
-        opacity: 0.75;
-        transform: none;
-        margin-top: 8px;
-    }
-
-    /* Ph.D. / B.Sc. milestones stack on small screens */
-    .timeline-media--phd-side,
-    .timeline-media--bsc-side {
-        float: none;
-        margin: 16px 0 0;
-    }
-
-    .timeline-media--phd-side img,
-    .timeline-media--bsc-side img {
-        width: 100%;
-        max-width: 280px;
-        aspect-ratio: auto;
-    }
-
+    /* Captions always visible on small screens */
+    .timeline-item--media-right .timeline-media figcaption,
     .timeline-media--phd-side figcaption,
     .timeline-media--bsc-side figcaption {
         opacity: 0.75;
