@@ -541,14 +541,13 @@ section#contact::before {
     min-width: 0;
 }
 
-/* figure becomes layout-transparent so its img + caption drop into the grid */
+/* figure sits in the grid's "media" column */
 .timeline-item--media-right .timeline-media {
-    display: contents;
+    grid-area: media;
+    align-self: start;
 }
 
 .timeline-item--media-right .timeline-media img {
-    grid-area: media;
-    align-self: start;
     width: 160px;
     max-height: none;
     aspect-ratio: 3 / 4;
@@ -557,9 +556,8 @@ section#contact::before {
         box-shadow 0.4s ease;
 }
 
-/* caption sits under the text and only fades in on hover */
+/* caption sits under the image and only fades in on hover */
 .timeline-item--media-right .timeline-media figcaption {
-    grid-area: cap;
     margin: 10px 0 0;
     opacity: 0;
     transform: translateY(-4px);
