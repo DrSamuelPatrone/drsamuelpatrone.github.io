@@ -1181,7 +1181,11 @@ section#contact::before {
     margin: 0 auto 32px;
 }
 
-#contact .btn-primary {
+.contact-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
     margin-bottom: 32px;
 }
 
