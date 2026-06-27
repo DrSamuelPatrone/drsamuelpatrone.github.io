@@ -627,16 +627,15 @@ section#contact::before {
     grid-area: head;
 }
 
-/* side figure is layout-transparent: img + caption drop into the grid */
+/* side figure sits in the grid's "side" column */
 .timeline-media--phd-side,
 .timeline-media--bsc-side {
-    display: contents;
+    grid-area: side;
+    align-self: start;
 }
 
 .timeline-media--phd-side img,
 .timeline-media--bsc-side img {
-    grid-area: side;
-    align-self: start;
     width: 160px;
     height: auto;
     aspect-ratio: 3 / 4;
@@ -647,7 +646,6 @@ section#contact::before {
 
 .timeline-content--phd .timeline-media--phd-side figcaption,
 .timeline-content--bsc .timeline-media--bsc-side figcaption {
-    grid-area: cap;
     margin: 10px 0 0;
     opacity: 0;
     transform: translateY(-4px);
