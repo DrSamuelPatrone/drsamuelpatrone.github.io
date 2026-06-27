@@ -525,20 +525,27 @@ section#contact::before {
     display: block;
 }
 
-/* Photo milestones: photo floats right, text wraps around it */
-.timeline-item--media-right .timeline-media {
-    float: right;
-    margin: 0 0 12px 16px;
+/* Photo milestones: text left, photo right */
+.timeline-item--media-right .timeline-content {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) auto;
+    grid-template-areas: "head media";
+    column-gap: 16px;
+    align-items: start;
 }
 
-.timeline-item--media-right .timeline-content::after {
-    content: '';
-    display: table;
-    clear: both;
+.timeline-item--media-right .timeline-head {
+    grid-area: head;
+    min-width: 0;
+}
+
+.timeline-item--media-right .timeline-media {
+    grid-area: media;
+    align-self: start;
 }
 
 .timeline-item--media-right .timeline-media img {
-    width: 120px;
+    width: 110px;
     aspect-ratio: 3 / 4;
     object-fit: cover;
     transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
@@ -546,7 +553,7 @@ section#contact::before {
 }
 
 .timeline-item--media-right .timeline-media figcaption {
-    margin: 10px 0 0;
+    margin: 8px 0 0;
     opacity: 0;
     transform: translateY(-4px);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -563,6 +570,11 @@ section#contact::before {
         opacity: 0.75;
         transform: translateY(0);
     }
+}
+
+.timeline-item--media-right .timeline-media img:focus ~ figcaption {
+    opacity: 0.75;
+    transform: translateY(0);
 }
 
 /* Logo beside a milestone (e.g. UC San Diego) */
@@ -595,22 +607,32 @@ section#contact::before {
 }
 
 /* Milestone with a photo beside the text and a video below (Ph.D., B.Sc.) */
-.timeline-media--phd-side,
-.timeline-media--bsc-side {
-    float: right;
-    margin: 0 0 12px 16px;
+.timeline-content--phd,
+.timeline-content--bsc {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) auto;
+    grid-template-areas:
+        "head side"
+        "bottom bottom";
+    column-gap: 16px;
+    align-items: start;
 }
 
-.timeline-content--phd::after,
-.timeline-content--bsc::after {
-    content: '';
-    display: table;
-    clear: both;
+.timeline-content--phd .timeline-head,
+.timeline-content--bsc .timeline-head {
+    grid-area: head;
+    min-width: 0;
+}
+
+.timeline-media--phd-side,
+.timeline-media--bsc-side {
+    grid-area: side;
+    align-self: start;
 }
 
 .timeline-media--phd-side img,
 .timeline-media--bsc-side img {
-    width: 120px;
+    width: 110px;
     height: auto;
     aspect-ratio: 3 / 4;
     object-fit: cover;
@@ -620,7 +642,7 @@ section#contact::before {
 
 .timeline-media--phd-side figcaption,
 .timeline-media--bsc-side figcaption {
-    margin: 10px 0 0;
+    margin: 8px 0 0;
     opacity: 0;
     transform: translateY(-4px);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -641,9 +663,15 @@ section#contact::before {
     }
 }
 
+.timeline-media--phd-side img:focus ~ figcaption,
+.timeline-media--bsc-side img:focus ~ figcaption {
+    opacity: 0.75;
+    transform: translateY(0);
+}
+
 .timeline-media--phd-bottom,
 .timeline-media--bsc-bottom {
-    clear: both;
+    grid-area: bottom;
 }
 
 .timeline-media--phd-bottom video,
@@ -1242,7 +1270,13 @@ footer p {
     .timeline-media--bsc-side figcaption {
         opacity: 0.75;
         transform: none;
-        margin-top: 8px;
+    }
+
+    /* Tighten side image on very narrow screens */
+    .timeline-media--phd-side img,
+    .timeline-media--bsc-side img,
+    .timeline-item--media-right .timeline-media img {
+        width: 80px;
     }
 
     /* Logo milestone stacks on small screens */
