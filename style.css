@@ -896,6 +896,13 @@ section#contact::before {
     line-height: 1.8;
 }
 
+.philosophy footer {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: normal;
+}
+
 /* --- Publications Section --- */
 .featured-pub {
     max-width: 700px;
