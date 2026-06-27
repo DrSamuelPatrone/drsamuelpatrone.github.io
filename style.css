@@ -879,15 +879,50 @@ section#contact::before {
     line-height: 1.65;
 }
 
-/* Philosophy blockquote */
-.teaching-quotes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+/* Quotes carousel */
+.quotes-carousel {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 860px;
     margin: 0 auto;
-    max-width: 1100px;
 }
 
+.carousel-track-wrap {
+    flex: 1;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+}
+
+.carousel-btn {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition), border-color var(--transition);
+}
+
+.carousel-btn:hover {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+}
+
+/* Philosophy blockquote */
 .philosophy {
     padding: 28px 32px;
     border-left: 3px solid var(--accent);
@@ -1326,11 +1361,6 @@ footer p {
 
     /* Research grid */
     .research-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Philosophy quotes */
-    .teaching-quotes {
         grid-template-columns: 1fr;
     }
 

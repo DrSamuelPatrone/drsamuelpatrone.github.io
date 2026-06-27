@@ -267,6 +267,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // --- Quotes Carousel ---
+    var carousel = document.querySelector('.quotes-carousel');
+    if (carousel) {
+        var track = carousel.querySelector('.carousel-track');
+        var slides = carousel.querySelectorAll('.carousel-slide');
+        var prevBtn = carousel.querySelector('.carousel-btn--prev');
+        var nextBtn = carousel.querySelector('.carousel-btn--next');
+        var current = 0;
+
+        function goTo(index) {
+            current = (index + slides.length) % slides.length;
+            track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        }
+
+        prevBtn.addEventListener('click', function () { goTo(current - 1); });
+        nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+        // Swipe support
+        var startX = 0;
+        carousel.addEventListener('touchstart', function (e) {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+        carousel.addEventListener('touchend', function (e) {
+            var dx = e.changedTouches[0].clientX - startX;
+            if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+        }, { passive: true });
+    }
+
     function animateCounter(el) {
         var text = el.textContent.trim();
         var suffix = text.replace(/[0-9]/g, '');
