@@ -606,22 +606,22 @@ section#contact::before {
     height: auto;
 }
 
-/* Milestone with a photo beside the text and a video below (Ph.D., B.Sc.) */
+/* Milestone with text full-width above, then video + photo side-by-side below */
 .timeline-content--phd,
 .timeline-content--bsc {
     display: grid;
-    grid-template-columns: minmax(120px, 1fr) auto;
+    grid-template-columns: 1fr auto;
     grid-template-areas:
-        "head side"
-        "bottom bottom";
+        "head   head"
+        "bottom side";
     column-gap: 16px;
+    row-gap: 16px;
     align-items: start;
 }
 
 .timeline-content--phd .timeline-head,
 .timeline-content--bsc .timeline-head {
     grid-area: head;
-    min-width: 0;
 }
 
 .timeline-media--phd-side,
@@ -1270,13 +1270,6 @@ footer p {
     .timeline-media--bsc-side figcaption {
         opacity: 0.75;
         transform: none;
-    }
-
-    /* Tighten side image on very narrow screens */
-    .timeline-media--phd-side img,
-    .timeline-media--bsc-side img,
-    .timeline-item--media-right .timeline-media img {
-        width: 80px;
     }
 
     /* Logo milestone stacks on small screens */
