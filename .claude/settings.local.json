@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/samuelpatrone/Documents/GitHub/drsamuelpatrone.github.io diff 31021f1 HEAD -- index.html)",
+      "Bash(git -C /Users/samuelpatrone/Documents/GitHub/drsamuelpatrone.github.io show 31021f1:index.html)",
+      "Bash(git *)",
+      "Bash(md5)",
+      "Bash(md5 /Users/samuelpatrone/Documents/GitHub/drsamuelpatrone.github.io/style.css)",
+      "WebFetch(domain:samuelpatrone.com)",
+      "Bash(curl -s https://samuelpatrone.com/assets/defense-slides.pdf -o /dev/null -w \"%{http_code} %{size_download}\")",
+      "Bash(curl -s https://samuelpatrone.com/assets/diploma.jpg -o /dev/null -w \"%{http_code} %{size_download}\")",
+      "Bash(curl -sI https://thesis.caltech.edu/18671/)",
+      "Bash(xxd)",
+      "Bash(pdftotext '/Users/samuelpatrone/Desktop/Samuel/PhD/CPET/Teaching Portfolio/Teaching_Portfolio.pdf' -)",
+      "Bash(python3 *)",
+      "Bash(grep -v \"^[^a-zA-Z]*$\")",
+      "Bash(grep -E \"[A-Za-z]{4,}\")",
+      "Bash(grep -v \"^[[:space:]]*$\")",
+      "Bash(mdimport -d2 '/Users/samuelpatrone/Desktop/Samuel/PhD/CPET/Teaching Portfolio/Teaching_Portfolio.pdf')",
+      "Bash(pip3 install *)",
+      "WebSearch"
+    ]
+  }
+}
