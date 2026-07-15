@@ -18,7 +18,8 @@
       "Bash(grep -v \"^[[:space:]]*$\")",
       "Bash(mdimport -d2 '/Users/samuelpatrone/Desktop/Samuel/PhD/CPET/Teaching Portfolio/Teaching_Portfolio.pdf')",
       "Bash(pip3 install *)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(gh auth *)"
     ]
   }
 }
