@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In Memoriam &mdash; Mark Wise</title>
+  <meta name="description" content="A remembrance of Prof. Mark Wise, by his student Samuel Patrone." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --paper: #f4efe4;
+      --paper-edge: #ece5d4;
+      --ink: #2a2521;
+      --ink-soft: #4a423b;
+      --rule: #b8a888;
+      --rule-light: #d8cdb4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--paper-edge);
+    }
+
+    body {
+      font-family: 'EB Garamond', 'Georgia', serif;
+      background: var(--paper);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 56px 72px;
+      background: var(--paper);
+    }
+
+    /* Header */
+    .kicker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .kicker .line {
+      flex: 1;
+      max-width: 160px;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .kicker span.label {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.35rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    h1.name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      text-align: center;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      margin-bottom: 22px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 0 auto 22px;
+      max-width: 420px;
+    }
+
+    .divider .line {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .divider .diamond {
+      width: 7px;
+      height: 7px;
+      background: var(--rule);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .byline {
+      text-align: center;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--ink-soft);
+      margin-bottom: 40px;
+    }
+
+    /* Photo */
+    figure.portrait {
+      margin: 0 0 32px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid var(--rule-light);
+      box-shadow: 0 6px 24px rgba(42, 37, 33, 0.12);
+    }
+
+    figure.portrait img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 13 / 9;
+      object-fit: cover;
+    }
+
+    figure.portrait figcaption {
+      padding: 10px 4px 2px;
+      text-align: center;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+    }
+
+    .divider--mid {
+      margin: 0 auto 40px;
+      max-width: 900px;
+    }
+
+    /* Body */
+    .eulogy {
+      column-count: 2;
+      column-gap: 48px;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .eulogy p {
+      margin-bottom: 1.3em;
+      break-inside: avoid-column;
+    }
+
+    .eulogy p.opening-line {
+      font-style: italic;
+    }
+
+    .eulogy .signoff {
+      margin-top: 0.4em;
+    }
+
+    .divider--footer {
+      margin: 40px auto 0;
+      max-width: 420px;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 28px;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      border-color: var(--rule);
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        padding: 40px 22px 48px;
+      }
+
+      .eulogy {
+        column-count: 1;
+      }
+
+      .kicker span.label {
+        font-size: 1.1rem;
+      }
+
+      .kicker .line {
+        max-width: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="kicker">
+      <span class="line"></span>
+      <span class="label">In Memoriam</span>
+      <span class="line"></span>
+    </div>
+
+    <h1 class="name">Mark Wise</h1>
+
+    <div class="divider">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+
+    <p class="byline">A remembrance by Samuel Patrone</p>
+
+    <figure class="portrait">
+      <img
+        src="assets/mark-wise-memoriam.jpg"
+        alt="Samuel Patrone, Mark Wise, and Adriano Testa smiling together in front of a Feynman-diagram-covered wall, all three wearing t-shirts reading &quot;licensed quantum mechanic&quot;"
+      />
+      <figcaption>From left to right, Samuel Patrone, Mark Wise and Adriano Testa, Caltech (2023)</figcaption>
+    </figure>
+
+    <div class="divider divider--mid">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+
+    <div class="eulogy">
+      <p class="opening-line">&ldquo;Hey Mark&rdquo;</p>
+      <p>For the last five years, knocking on his office door and saying those words was my good morning ritual. Sometimes he would answer immediately, while scrolling through the arXiv; other times he was simply too absorbed in his calculations (rigorously hand written in yellow notebooks) or blasting 70s music through his Bose headset to notice me. But eventually, I would catch his attention in some way. Because his door was always open. Always.</p>
+      <p>He would look at me, holding the back of his neck with his hand, and smile: <em>&ldquo;How&rsquo;s it going?&rdquo;</em> I never knew beforehand what our conversation would become. Sometimes it was about a new problem for Ph205 (<em>&ldquo;A field redefinition should do the trick&rdquo;</em>), other times about the stock market, or politics and, of course, Physics. There was no question I couldn&rsquo;t ask, no problem I couldn&rsquo;t pose, that Mark would have dismissed. Little by little, with patience and resilience, he taught me that every problem is worth approaching and understood by tackling it bits after bits.</p>
+      <p>Six weeks ago, at the end of my defense, Mark shook my hand and told me: <em>&ldquo;Congratulations, Doctor!&rdquo;</em> But I didn&rsquo;t feel different. I think that is because, throughout these years, he had already treated me as a peer, a collaborator, a friend, and sometimes a grandson. A grandson with tachycardia.</p>
+      <p>At the Athenaeum, we would check both our pulses using our Apple Watches, and mine was always worse. <em>&ldquo;Jeez, I should give you my cardiologist&rsquo;s number.&rdquo;</em></p>
+      <p>Steak dinners at Magnolia House, or on Granville&rsquo;s rooftop, were our favourites &mdash; to celebrate a new paper and rigorously with Jackie&rsquo;s authorization. We would always share a glass of red wine and talk about anything.</p>
+      <p>He would tell me about that time that Feynman posed him a question during his seminar and he worked all night long on the answer. Or when he was testing cables in a factory and blew everything out with a very high voltage. Or the time he was in Rome, having breakfast right in front of the Colosseum and taking the train to Frascati.</p>
+      <p>Mark was my advisor with the Capital A. And I&rsquo;m sure I&rsquo;m talking on behalf of all his past students when I tell you what an extraordinary advisor he was.</p>
+      <p>He guided us all along the path, steadying the helm when we doubted ourselves, trusting us when we needed confidence, leading us when we were lost and letting us go when we needed independence.</p>
+      <p>Through his preparation, wit, intellectual generosity, patience, contagious enthusiasm for physics, he has been a neverending source of inspiration and guidance for generations of scientists. He showed us all the kind of physicists, mentors and educators we could hope to become.</p>
+      <p>Mark used to say that if God existed, when he reached heaven, God would test him to determine if he was worthy of being there. God would ask him what his most important contribution to Physics had been, and he would answer: <em>&ldquo;HQET.&rdquo;</em> Then he would add: <em>&ldquo;At least it&rsquo;s real, not like BSM physics.&rdquo;</em></p>
+      <p>And now I imagine you standing in front of the best blackboard in the Universe, with God seated before you and taking notes, as you write down the HQET Lagrangian in terms of the heavy superfields. I imagine you explaining it with your usual patience, enthusiasm, that familiar spark in your eyes, tossing a coin to an angel who answered correctly and singing <em>&ldquo;the thrill of victory&rdquo;</em> at the end of the proof. And somehow, even in heaven, you&rsquo;re still teaching.</p>
+      <p>I had the immense honor of being your last student, Mark. But I know I will not be the last person you teach.</p>
+      <p>You will continue teaching through all of us, every time we trust a young scientist before they fully know how to trust themselves, every time we stay with a problem instead of giving up, every time we leave our door open, every time we look more deeply at Nature and uncover her secrets.</p>
+      <p>You made this little corner of the Universe brighter&hellip; And, I promise, it will continue to shine with your light.</p>
+      <p class="signoff">Thank you, Mark!</p>
+    </div>
+
+    <div class="divider divider--footer">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+
+    <a class="back-link" href="index.html">&larr; Back to samuelpatrone.com</a>
+  </div>
+</body>
+</html>

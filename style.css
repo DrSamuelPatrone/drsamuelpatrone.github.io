@@ -737,7 +737,8 @@ section#contact::before {
 }
 
 .timeline-pdf-link {
-    display: inline-flex;
+    display: flex;
+    width: fit-content;
     align-items: center;
     gap: 6px;
     margin-top: 8px;
@@ -761,6 +762,16 @@ section#contact::before {
 
 .timeline-pdf-link i {
     font-size: 0.85rem;
+}
+
+.timeline-pdf-link--memoriam {
+    color: #c9a875;
+    background: rgba(201, 168, 117, 0.12);
+}
+
+.timeline-pdf-link--memoriam:hover,
+.timeline-pdf-link--memoriam:focus-visible {
+    border-color: #c9a875;
 }
 
 /* Honors (expandable) */
