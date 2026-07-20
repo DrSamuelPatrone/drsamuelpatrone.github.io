@@ -205,6 +205,10 @@
       .kicker .line {
         max-width: 60px;
       }
+
+      figure.portrait img {
+        aspect-ratio: 13 / 9;
+      }
     }
   </style>
 </head>
@@ -227,10 +231,13 @@
     <p class="byline">A remembrance by Samuel Patrone</p>
 
     <figure class="portrait">
-      <img
-        src="assets/mark-wise-memoriam.jpg"
-        alt="Samuel Patrone, Mark Wise, and Adriano Testa smiling together in front of a Feynman-diagram-covered wall, all three wearing t-shirts reading &quot;licensed quantum mechanic&quot;"
-      />
+      <picture>
+        <source media="(max-width: 720px)" srcset="assets/mark-wise-memoriam-mobile.jpg" />
+        <img
+          src="assets/mark-wise-memoriam.jpg"
+          alt="Samuel Patrone, Mark Wise, and Adriano Testa smiling together in front of a Feynman-diagram-covered wall, all three wearing t-shirts reading &quot;licensed quantum mechanic&quot;"
+        />
+      </picture>
       <figcaption>From left to right, Samuel Patrone, Mark Wise and Adriano Testa, Caltech (2023)</figcaption>
     </figure>
 
