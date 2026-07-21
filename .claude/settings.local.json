@@ -19,7 +19,9 @@
       "Bash(mdimport -d2 '/Users/samuelpatrone/Desktop/Samuel/PhD/CPET/Teaching Portfolio/Teaching_Portfolio.pdf')",
       "Bash(pip3 install *)",
       "WebSearch",
-      "Bash(gh auth *)"
+      "Bash(gh auth *)",
+      "Bash(sips -g pixelWidth -g pixelHeight \"/Users/samuelpatrone/Desktop/IMG_7050.jpeg\")",
+      "Bash(sips -Z 1800 -s format jpeg -s formatOptions 82 \"/Users/samuelpatrone/Desktop/IMG_7050.jpeg\" --out \"assets/mark-wise-memoriam.jpg\")"
     ]
   }
 }
