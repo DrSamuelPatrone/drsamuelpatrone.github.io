@@ -1035,6 +1035,12 @@ section#contact::before {
     opacity: 1;
 }
 
+/* A tap on a card in the wings should bring it forward, not follow whatever
+   link happens to sit under the finger. */
+.pub-card:not(.is-active) a {
+    pointer-events: none;
+}
+
 /* Specular sheen — only on the card facing the viewer */
 .pub-card::after {
     content: '';

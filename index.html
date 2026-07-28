@@ -69,7 +69,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
+    <!-- ?v= must be bumped whenever style.css or script.js changes. Pages
+         serves both with max-age=600, so without it a browser can pair new
+         markup with a stale stylesheet and the layout falls apart. -->
+    <link rel="stylesheet" href="style.css?v=2" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -975,6 +978,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
   </body>
 </html>
