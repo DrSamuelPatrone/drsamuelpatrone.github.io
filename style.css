@@ -988,6 +988,9 @@ section#contact::before {
     perspective: 1500px;
     perspective-origin: 50% 45%;
     transform-style: preserve-3d;
+    /* How visible the cards either side of the front one are. Read by the
+       carousel script so a media query can hide them entirely. */
+    --wing-opacity: 0.32;
 }
 
 /* The deck overhangs the stage, so the arrows need to be lifted above it
@@ -1558,6 +1561,9 @@ footer p {
     .pub-stage {
         height: 460px;
         perspective: 1100px;
+        /* At this width a full-bleed card leaves the neighbours peeking out
+           from behind its edges, which just reads as a stray second layer. */
+        --wing-opacity: 0;
     }
 
     .pub-card {

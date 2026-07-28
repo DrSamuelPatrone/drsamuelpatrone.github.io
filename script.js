@@ -311,6 +311,13 @@ document.addEventListener('DOMContentLoaded', function () {
             { x: 76, z: -330, ry: 34, s: 0.78, o: 0, zi: 10 }
         ];
 
+        // Narrow layouts hide the wings entirely; --wing-opacity carries that
+        // decision over from the stylesheet so the breakpoint lives in one place.
+        function readWingOpacity() {
+            var v = getComputedStyle(stage).getPropertyValue('--wing-opacity').trim();
+            DEPTH[1].o = v === '' ? 0.32 : parseFloat(v);
+        }
+
         // Shortest signed distance from the active card, so the deck wraps
         function offsetOf(i) {
             var n = cards.length;
@@ -378,7 +385,11 @@ document.addEventListener('DOMContentLoaded', function () {
         var resizeTimer;
         window.addEventListener('resize', function () {
             clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(sizeStage, 150);
+            resizeTimer = setTimeout(function () {
+                sizeStage();
+                readWingOpacity();
+                renderPubs();
+            }, 150);
         });
 
         // Dots
@@ -452,6 +463,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         sizeStage();
+        readWingOpacity();
         renderPubs();
 
         // Font swap can rewrap the text after first paint
