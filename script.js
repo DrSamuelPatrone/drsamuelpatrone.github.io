@@ -330,8 +330,12 @@ document.addEventListener('DOMContentLoaded', function () {
         function transformFor(off) {
             var d = DEPTH[Math.min(Math.abs(off), DEPTH.length - 1)];
             var dir = off < 0 ? -1 : 1;
+            // A card nobody can see must not sit outside the stage: it still
+            // counts towards the page width, which lets the whole layout be
+            // dragged sideways on a touch screen.
+            var x = d.o === 0 ? 0 : dir * d.x;
             return 'translateX(-50%)' +
-                ' translateX(' + (dir * d.x) + '%)' +
+                ' translateX(' + x + '%)' +
                 ' translateZ(' + d.z + 'px)' +
                 ' rotateY(' + (-dir * d.ry) + 'deg)' +
                 ' scale(' + d.s + ')';

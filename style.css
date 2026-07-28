@@ -36,6 +36,12 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
+    /* Nothing should be able to drag the page sideways. `clip` is preferred
+       because, unlike `hidden`, it does not turn html into a scroll
+       container and so leaves smooth scrolling intact; the `hidden` above
+       is the fallback for browsers without it. */
+    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 body {
@@ -979,6 +985,9 @@ section#contact::before {
     gap: 16px;
     max-width: 900px;
     margin: 0 auto;
+    /* Vertical drags still scroll the page; horizontal ones belong to the
+       deck, so the browser must not treat them as a pan gesture. */
+    touch-action: pan-y;
 }
 
 .pub-stage {
