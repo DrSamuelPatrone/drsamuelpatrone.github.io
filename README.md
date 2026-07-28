@@ -1,6 +1,6 @@
 # samuelpatrone.com
 
-Personal website for Samuel Patrone — theoretical physicist, PhD candidate at Caltech, and incoming postdoctoral researcher at UC San Diego.
+Personal website for Samuel Patrone — theoretical physicist, PhD candidate at Caltech, and incoming postdoctoral scholar at UC San Diego.
 
 ## Live Site
 
