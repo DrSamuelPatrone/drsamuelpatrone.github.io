@@ -1336,23 +1336,6 @@ section#contact::before {
     margin-bottom: 32px;
 }
 
-.contact-social {
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-}
-
-.contact-social a {
-    color: var(--text-secondary);
-    font-size: 1.4rem;
-    transition: color var(--transition), transform var(--transition);
-}
-
-.contact-social a:hover {
-    color: var(--accent);
-    transform: translateY(-3px);
-}
-
 /* --- Follow (outreach channels) --- */
 .follow {
     margin-top: 48px;
