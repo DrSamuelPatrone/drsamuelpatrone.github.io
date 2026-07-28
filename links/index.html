@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samuel Patrone &mdash; Links</title>
+    <meta
+      name="description"
+      content="Links to Samuel Patrone's website, channels, publications and contact."
+    />
+    <!-- A utility page for profile-bio traffic, not a search landing page:
+         keep it out of the index so it cannot compete with the homepage,
+         but let the links themselves be followed. -->
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://samuelpatrone.com/links" />
+    <meta property="og:title" content="Samuel Patrone" />
+    <meta
+      property="og:description"
+      content="Phenomenological physicist. Website, channels, publications and contact."
+    />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://samuelpatrone.com/links" />
+    <meta
+      property="og:image"
+      content="https://samuelpatrone.com/assets/profile.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0a0a1a" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      /* Tokens mirror style.css so this page reads as part of the same site,
+         but it stays self-contained: bio traffic arrives on cellular and
+         should not wait on the full site stylesheet or the particle field. */
+      :root {
+        --bg-primary: #0a0a1a;
+        --bg-card: rgba(255, 255, 255, 0.04);
+        --bg-card-hover: rgba(255, 255, 255, 0.08);
+        --text-primary: #ffffff;
+        --text-secondary: #a0a0c0;
+        --accent: #4fc3f7;
+        --accent-dim: rgba(79, 195, 247, 0.15);
+        --accent-secondary: #7c4dff;
+        --border: rgba(79, 195, 247, 0.12);
+        --border-hover: rgba(79, 195, 247, 0.35);
+        --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        --transition: 0.25s ease;
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font);
+        background: var(--bg-primary);
+        color: var(--text-secondary);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        /* Faint echo of the homepage's glow, cheaper than the canvas */
+        background-image:
+          radial-gradient(ellipse 80% 50% at 50% -10%, rgba(79, 195, 247, 0.13), transparent),
+          radial-gradient(ellipse 60% 40% at 50% 110%, rgba(124, 77, 255, 0.1), transparent);
+        background-repeat: no-repeat;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: 460px;
+        padding: 56px 20px 40px;
+        text-align: center;
+      }
+
+      .photo {
+        width: 112px;
+        height: 112px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--accent-dim);
+        box-shadow: 0 0 34px rgba(79, 195, 247, 0.25);
+        margin: 0 auto 20px;
+        display: block;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: -0.4px;
+      }
+
+      .tagline {
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--accent);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-top: 6px;
+      }
+
+      .credential {
+        font-size: 0.9rem;
+        margin-top: 10px;
+      }
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .link {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        /* 60px keeps every row a comfortable thumb target */
+        min-height: 60px;
+        padding: 14px 18px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--bg-card);
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 0.98rem;
+        font-weight: 500;
+        text-align: left;
+        transition: background var(--transition), border-color var(--transition),
+          transform var(--transition);
+      }
+
+      .link:hover,
+      .link:focus-visible {
+        background: var(--bg-card-hover);
+        border-color: var(--border-hover);
+        transform: translateY(-2px);
+      }
+
+      .link:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .link i:first-child {
+        color: var(--accent);
+        font-size: 1.15rem;
+        width: 24px;
+        text-align: center;
+        flex: 0 0 24px;
+      }
+
+      .link .label {
+        flex: 1;
+      }
+
+      .link .sub {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+        margin-top: 1px;
+      }
+
+      .link .chev {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        opacity: 0.5;
+      }
+
+      /* The site itself is the destination that matters most */
+      .link--primary {
+        background: linear-gradient(135deg, rgba(79, 195, 247, 0.16), rgba(124, 77, 255, 0.16));
+        border-color: var(--border-hover);
+      }
+
+      footer {
+        margin-top: 34px;
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+        opacity: 0.65;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .link {
+          transition: background var(--transition), border-color var(--transition);
+        }
+        .link:hover,
+        .link:focus-visible {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <img
+        class="photo"
+        src="../assets/profile.png"
+        alt="Samuel Patrone"
+        width="112"
+        height="112"
+      />
+      <h1>Samuel Patrone</h1>
+      <p class="tagline">Phenomenological Physicist</p>
+      <!-- Drop "Incoming" here when the UC San Diego post starts in September,
+           at the same time as the hero line on the homepage. -->
+      <p class="credential">
+        PhD, Caltech &middot; Incoming postdoc, UC San Diego
+      </p>
+
+      <nav class="links">
+        <a class="link link--primary" href="https://samuelpatrone.com/">
+          <i class="fa-solid fa-globe"></i>
+          <span class="label"
+            >Website
+            <span class="sub">Research, teaching and publications</span></span
+          >
+          <i class="fa-solid fa-chevron-right chev"></i>
+        </a>
+
+        <a
+          class="link"
+          href="https://www.youtube.com/channel/UCjN8LudwVZM3V00HSObgPtg"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fa-brands fa-youtube"></i>
+          <span class="label">YouTube <span class="sub">Physics explained</span></span>
+          <i class="fa-solid fa-chevron-right chev"></i>
+        </a>
+
+        <a
+          class="link"
+          href="https://www.instagram.com/drpatrone/"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fa-brands fa-instagram"></i>
+          <span class="label">Instagram <span class="sub">@drpatrone</span></span>
+          <i class="fa-solid fa-chevron-right chev"></i>
+        </a>
+
+        <a class="link" href="https://x.com/DrPatrone" target="_blank" rel="noopener">
+          <i class="fa-brands fa-x-twitter"></i>
+          <span class="label">X <span class="sub">@DrPatrone</span></span>
+          <i class="fa-solid fa-chevron-right chev"></i>
+        </a>
+
+        <a
+          class="link"
+          href="https://inspirehep.net/authors/1878725"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fa-solid fa-book"></i>
+          <span class="label"
+            >Publications <span class="sub">INSPIRE-HEP</span></span
+          >
+          <i class="fa-solid fa-chevron-right chev"></i>
+        </a>
+
+        <a
+          class="link"
+          href="https://www.linkedin.com/in/DrSamuelPatrone/"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fa-brands fa-linkedin"></i>
+          <span class="label">LinkedIn</span>
+          <i class="fa-solid fa-chevron-right chev"></i>
+        </a>
+
+        <a class="link" href="../assets/resume.pdf" target="_blank" rel="noopener">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span class="label">R&eacute;sum&eacute; <span class="sub">PDF</span></span>
+          <i class="fa-solid fa-chevron-right chev"></i>
+        </a>
+
+        <a class="link" href="mailto:samuel@samuelpatrone.com">
+          <i class="fa-solid fa-envelope"></i>
+          <span class="label"
+            >Email <span class="sub">samuel@samuelpatrone.com</span></span
+          >
+          <i class="fa-solid fa-chevron-right chev"></i>
+        </a>
+      </nav>
+
+      <footer>samuelpatrone.com</footer>
+    </main>
+  </body>
+</html>
