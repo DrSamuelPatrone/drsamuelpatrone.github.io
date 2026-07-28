@@ -302,7 +302,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var cards = Array.prototype.slice.call(stage.querySelectorAll('.pub-card'));
         var dotsWrap = document.querySelector('.pub-dots');
         var pubIndex = 0;
-        var activeBase = '';
 
         // Position/scale/opacity keyed by distance from the active card
         var DEPTH = [
@@ -311,10 +310,14 @@ document.addEventListener('DOMContentLoaded', function () {
             { x: 76, z: -330, ry: 34, s: 0.78, o: 0, zi: 10 }
         ];
 
-        // Narrow layouts hide the wings entirely; --wing-opacity carries that
-        // decision over from the stylesheet so the breakpoint lives in one place.
-        function readWingOpacity() {
-            var v = getComputedStyle(stage).getPropertyValue('--wing-opacity').trim();
+        // The stylesheet decides which of the two layouts is in play, so the
+        // breakpoint lives in exactly one place.
+        var slideMode = false;
+
+        function readDeckMode() {
+            var cs = getComputedStyle(stage);
+            slideMode = cs.getPropertyValue('--deck-slide').trim() === '1';
+            var v = cs.getPropertyValue('--wing-opacity').trim();
             DEPTH[1].o = v === '' ? 0.32 : parseFloat(v);
         }
 
@@ -328,6 +331,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function transformFor(off) {
+            // Flat slider: one card width apart, clipped by the stage.
+            if (slideMode) {
+                return 'translateX(-50%) translateX(' + (off * 104) + '%)';
+            }
+
             var d = DEPTH[Math.min(Math.abs(off), DEPTH.length - 1)];
             var dir = off < 0 ? -1 : 1;
             // A card nobody can see must not sit outside the stage: it still
@@ -347,11 +355,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 var d = DEPTH[Math.min(Math.abs(off), DEPTH.length - 1)];
                 var active = off === 0;
 
+                // In slide mode a card two steps away would otherwise travel
+                // from one side of the stage to the other on a wrap, sweeping
+                // visibly across the card on show. Let it jump instead.
+                card.style.transition = (slideMode && Math.abs(off) > 1) ? 'none' : '';
+
                 card.style.transform = transformFor(off);
-                card.style.opacity = d.o;
+                // The stage clips the slider, so its cards need no fading.
+                card.style.opacity = slideMode ? 1 : d.o;
                 card.style.zIndex = d.zi;
                 card.classList.toggle('is-active', active);
-                card.classList.remove('is-tilting');
                 card.setAttribute('aria-hidden', active ? 'false' : 'true');
 
                 // Keep links on hidden cards out of the tab order
@@ -359,8 +372,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     link.tabIndex = active ? 0 : -1;
                 });
             });
-
-            activeBase = transformFor(0);
 
             Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
                 dot.classList.toggle('is-active', i === pubIndex);
@@ -391,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(function () {
                 sizeStage();
-                readWingOpacity();
+                readDeckMode();
                 renderPubs();
             }, 150);
         });
@@ -434,40 +445,13 @@ document.addEventListener('DOMContentLoaded', function () {
             if (Math.abs(dx) > 40) goToPub(pubIndex + (dx < 0 ? 1 : -1));
         }, { passive: true });
 
-        // Pointer-tracked tilt on the front card, for mice only
-        var canTilt = window.matchMedia('(hover: hover)').matches &&
-            !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        if (canTilt) {
-            var tiltQueued = false;
-            var tiltX = 0;
-            var tiltY = 0;
-
-            stage.addEventListener('pointermove', function (e) {
-                var rect = stage.getBoundingClientRect();
-                tiltY = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
-                tiltX = -((e.clientY - rect.top) / rect.height - 0.5) * 8;
-                if (tiltQueued) return;
-                tiltQueued = true;
-                requestAnimationFrame(function () {
-                    tiltQueued = false;
-                    var card = cards[pubIndex];
-                    card.classList.add('is-tilting');
-                    card.style.transform = activeBase +
-                        ' rotateX(' + tiltX.toFixed(2) + 'deg)' +
-                        ' rotateY(' + tiltY.toFixed(2) + 'deg)';
-                });
-            });
-
-            stage.addEventListener('pointerleave', function () {
-                var card = cards[pubIndex];
-                card.classList.remove('is-tilting');
-                card.style.transform = activeBase;
-            });
-        }
+        // There was a pointer-tracked tilt on the front card here. It moved the
+        // card under the cursor, so the arXiv and Journal buttons drifted while
+        // being aimed at and clicks missed them. The deck already reads as 3D
+        // without it, and working links matter more than the flourish.
 
         sizeStage();
-        readWingOpacity();
+        readDeckMode();
         renderPubs();
 
         // Font swap can rewrap the text after first paint

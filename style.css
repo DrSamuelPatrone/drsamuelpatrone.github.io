@@ -1079,15 +1079,6 @@ section#contact::before {
     opacity: 1;
 }
 
-/* Pointer tilt needs to track the cursor, not ease like a slide change */
-.pub-card.is-tilting {
-    transition:
-        transform 0.12s ease-out,
-        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.55s ease,
-        border-color var(--transition);
-}
-
 .pub-dots {
     display: flex;
     justify-content: center;
@@ -1567,12 +1558,19 @@ footer p {
         display: none;
     }
 
+    /* Narrow screens get a flat slider instead of the coverflow: there is no
+       room for the deck to read as depth, and hiding the neighbours in place
+       turns a swipe into a blink. Cards sit a full width apart and the stage
+       clips them, so one card shows and the swipe actually tracks sideways. */
     .pub-stage {
         height: 460px;
-        perspective: 1100px;
-        /* At this width a full-bleed card leaves the neighbours peeking out
-           from behind its edges, which just reads as a stray second layer. */
-        --wing-opacity: 0;
+        perspective: none;
+        overflow: hidden;
+        --deck-slide: 1;
+    }
+
+    .pub-card {
+        filter: none;
     }
 
     .pub-card {
