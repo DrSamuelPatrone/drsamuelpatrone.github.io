@@ -971,19 +971,130 @@ section#contact::before {
 }
 
 /* --- Publications Section --- */
-.featured-pub {
-    max-width: 700px;
-    margin: 0 auto 32px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px 36px 28px;
-    position: relative;
-    transition: border-color var(--transition);
+
+/* 3D paper carousel */
+.pub-carousel {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.featured-pub:hover {
+.pub-stage {
+    position: relative;
+    flex: 1;
+    height: 400px;
+    perspective: 1500px;
+    perspective-origin: 50% 45%;
+    transform-style: preserve-3d;
+}
+
+/* The deck overhangs the stage, so the arrows need to be lifted above it
+   and given a backdrop — otherwise the wing cards swallow the clicks. */
+.pub-carousel .carousel-btn {
+    position: relative;
+    z-index: 40;
+    background: rgba(10, 10, 26, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.pub-card {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(100%, 540px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Opaque — the deck overlaps itself, so cards must occlude what's behind.
+       These are the translucent card tints flattened onto --bg-primary. */
+    background: linear-gradient(160deg, #1b1b2a, #111121);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 34px 26px;
+    /* Fallback before JS positions the deck: card 1 centered, rest hidden */
+    transform: translateX(-50%);
+    opacity: 0;
+    backface-visibility: hidden;
+    /* Cards in the wings sit behind glass so they never compete for reading */
+    filter: blur(2px);
+    cursor: pointer;
+    will-change: transform, opacity;
+    transition:
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.55s ease,
+        box-shadow 0.55s ease,
+        border-color var(--transition);
+}
+
+.pub-card:first-child {
+    opacity: 1;
+}
+
+/* Specular sheen — only on the card facing the viewer */
+.pub-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+        linear-gradient(125deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 45%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.55s ease;
+}
+
+.pub-card.is-active {
+    filter: none;
+    cursor: default;
     border-color: var(--border-hover);
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.45),
+        0 12px 40px rgba(79, 195, 247, 0.1);
+}
+
+.pub-card.is-active::after {
+    opacity: 1;
+}
+
+/* Pointer tilt needs to track the cursor, not ease like a slide change */
+.pub-card.is-tilting {
+    transition:
+        transform 0.12s ease-out,
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.55s ease,
+        border-color var(--transition);
+}
+
+.pub-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 24px 0 30px;
+}
+
+.pub-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+}
+
+.pub-dot:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.pub-dot.is-active {
+    background: var(--accent);
+    transform: scale(1.35);
 }
 
 .pub-badge {
@@ -999,7 +1110,7 @@ section#contact::before {
     margin-bottom: 16px;
 }
 
-.featured-pub h3 {
+.pub-card h3 {
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--text-primary);
@@ -1029,6 +1140,11 @@ section#contact::before {
 .pub-links {
     display: flex;
     gap: 16px;
+}
+
+/* Pin the links to the card floor so uneven abstract lengths still line up */
+.pub-card .pub-links {
+    margin-top: auto;
 }
 
 .pub-links a {
@@ -1421,6 +1537,67 @@ footer p {
         flex-direction: column;
         align-items: center;
     }
+
+    /* Paper carousel: too narrow to flank the deck, and floating the arrows
+       over it covers the abstract. Swipe and the dots navigate instead. */
+    .pub-carousel {
+        position: relative;
+        gap: 0;
+    }
+
+    .pub-carousel .carousel-btn {
+        display: none;
+    }
+
+    .pub-stage {
+        height: 460px;
+        perspective: 1100px;
+    }
+
+    .pub-card {
+        padding: 26px 24px 22px;
+    }
+
+    /* Grow the dots into a real tap target without growing the dot itself */
+    .pub-dots {
+        gap: 4px;
+        margin: 14px 0 28px;
+    }
+
+    .pub-dot {
+        position: relative;
+        width: 36px;
+        height: 36px;
+        background: none;
+    }
+
+    .pub-dot::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.22);
+        transform: translate(-50%, -50%);
+        transition: background var(--transition);
+    }
+
+    .pub-dot:hover {
+        background: none;
+    }
+
+    .pub-dot.is-active {
+        background: none;
+        transform: none;
+    }
+
+    .pub-dot.is-active::before {
+        width: 10px;
+        height: 10px;
+        background: var(--accent);
+    }
 }
 
 @media (max-width: 480px) {
@@ -1516,4 +1693,15 @@ footer p {
 .lightbox-close:hover,
 .lightbox-close:focus-visible {
     opacity: 1;
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+    .pub-card {
+        transition: opacity 0.2s linear;
+    }
+
+    .pub-card::after {
+        transition: none;
+    }
 }

@@ -295,6 +295,171 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { passive: true });
     }
 
+    // --- Publications 3D Carousel ---
+    var pubCarousel = document.querySelector('.pub-carousel');
+    if (pubCarousel) {
+        var stage = pubCarousel.querySelector('.pub-stage');
+        var cards = Array.prototype.slice.call(stage.querySelectorAll('.pub-card'));
+        var dotsWrap = document.querySelector('.pub-dots');
+        var pubIndex = 0;
+        var activeBase = '';
+
+        // Position/scale/opacity keyed by distance from the active card
+        var DEPTH = [
+            { x: 0, z: 0, ry: 0, s: 1, o: 1, zi: 30 },
+            { x: 58, z: -170, ry: 28, s: 0.88, o: 0.32, zi: 20 },
+            { x: 76, z: -330, ry: 34, s: 0.78, o: 0, zi: 10 }
+        ];
+
+        // Shortest signed distance from the active card, so the deck wraps
+        function offsetOf(i) {
+            var n = cards.length;
+            var off = i - pubIndex;
+            if (off > n / 2) off -= n;
+            if (off < -n / 2) off += n;
+            return off;
+        }
+
+        function transformFor(off) {
+            var d = DEPTH[Math.min(Math.abs(off), DEPTH.length - 1)];
+            var dir = off < 0 ? -1 : 1;
+            return 'translateX(-50%)' +
+                ' translateX(' + (dir * d.x) + '%)' +
+                ' translateZ(' + d.z + 'px)' +
+                ' rotateY(' + (-dir * d.ry) + 'deg)' +
+                ' scale(' + d.s + ')';
+        }
+
+        function renderPubs() {
+            cards.forEach(function (card, i) {
+                var off = offsetOf(i);
+                var d = DEPTH[Math.min(Math.abs(off), DEPTH.length - 1)];
+                var active = off === 0;
+
+                card.style.transform = transformFor(off);
+                card.style.opacity = d.o;
+                card.style.zIndex = d.zi;
+                card.classList.toggle('is-active', active);
+                card.classList.remove('is-tilting');
+                card.setAttribute('aria-hidden', active ? 'false' : 'true');
+
+                // Keep links on hidden cards out of the tab order
+                Array.prototype.forEach.call(card.querySelectorAll('a'), function (link) {
+                    link.tabIndex = active ? 0 : -1;
+                });
+            });
+
+            activeBase = transformFor(0);
+
+            Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
+                dot.classList.toggle('is-active', i === pubIndex);
+                dot.setAttribute('aria-current', i === pubIndex ? 'true' : 'false');
+            });
+        }
+
+        function goToPub(index) {
+            pubIndex = (index + cards.length) % cards.length;
+            renderPubs();
+        }
+
+        // Cards are absolutely positioned, so the stage needs an explicit
+        // height. Measure the tallest card at the current width rather than
+        // trusting a fixed value that clips once the text rewraps.
+        function sizeStage() {
+            var tallest = 0;
+            cards.forEach(function (card) {
+                card.style.height = 'auto';
+                tallest = Math.max(tallest, card.offsetHeight);
+                card.style.height = '';
+            });
+            stage.style.height = tallest + 'px';
+        }
+
+        var resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(sizeStage, 150);
+        });
+
+        // Dots
+        cards.forEach(function (card, i) {
+            var dot = document.createElement('button');
+            dot.className = 'pub-dot';
+            dot.type = 'button';
+            var heading = card.querySelector('h3');
+            dot.setAttribute('aria-label', heading ? heading.textContent.trim() : 'Paper ' + (i + 1));
+            dot.addEventListener('click', function () { goToPub(i); });
+            dotsWrap.appendChild(dot);
+        });
+
+        pubCarousel.querySelector('.carousel-btn--prev')
+            .addEventListener('click', function () { goToPub(pubIndex - 1); });
+        pubCarousel.querySelector('.carousel-btn--next')
+            .addEventListener('click', function () { goToPub(pubIndex + 1); });
+
+        // Clicking a card in the wings brings it to the front
+        cards.forEach(function (card, i) {
+            card.addEventListener('click', function () {
+                if (offsetOf(i) !== 0) goToPub(i);
+            });
+        });
+
+        pubCarousel.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowLeft') { goToPub(pubIndex - 1); }
+            else if (e.key === 'ArrowRight') { goToPub(pubIndex + 1); }
+        });
+
+        // Swipe
+        var pubStartX = 0;
+        pubCarousel.addEventListener('touchstart', function (e) {
+            pubStartX = e.touches[0].clientX;
+        }, { passive: true });
+        pubCarousel.addEventListener('touchend', function (e) {
+            var dx = e.changedTouches[0].clientX - pubStartX;
+            if (Math.abs(dx) > 40) goToPub(pubIndex + (dx < 0 ? 1 : -1));
+        }, { passive: true });
+
+        // Pointer-tracked tilt on the front card, for mice only
+        var canTilt = window.matchMedia('(hover: hover)').matches &&
+            !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (canTilt) {
+            var tiltQueued = false;
+            var tiltX = 0;
+            var tiltY = 0;
+
+            stage.addEventListener('pointermove', function (e) {
+                var rect = stage.getBoundingClientRect();
+                tiltY = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+                tiltX = -((e.clientY - rect.top) / rect.height - 0.5) * 8;
+                if (tiltQueued) return;
+                tiltQueued = true;
+                requestAnimationFrame(function () {
+                    tiltQueued = false;
+                    var card = cards[pubIndex];
+                    card.classList.add('is-tilting');
+                    card.style.transform = activeBase +
+                        ' rotateX(' + tiltX.toFixed(2) + 'deg)' +
+                        ' rotateY(' + tiltY.toFixed(2) + 'deg)';
+                });
+            });
+
+            stage.addEventListener('pointerleave', function () {
+                var card = cards[pubIndex];
+                card.classList.remove('is-tilting');
+                card.style.transform = activeBase;
+            });
+        }
+
+        sizeStage();
+        renderPubs();
+
+        // Font swap can rewrap the text after first paint
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(sizeStage);
+        }
+    }
+
     function animateCounter(el) {
         var text = el.textContent.trim();
         var suffix = text.replace(/[0-9]/g, '');
