@@ -1353,6 +1353,60 @@ section#contact::before {
     transform: translateY(-3px);
 }
 
+/* --- Follow (outreach channels) --- */
+.follow {
+    margin-top: 48px;
+    padding-top: 36px;
+    /* Hairline above sets these apart from the identifiers, without
+       needing a second heading in the section. */
+    border-top: 1px solid var(--border);
+}
+
+.follow-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.follow-icons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.follow-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--accent);
+    font-size: 1.25rem;
+    transition: background var(--transition), border-color var(--transition),
+        transform var(--transition);
+}
+
+.follow-icons a:hover,
+.follow-icons a:focus-visible {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.follow-handle {
+    margin-top: 14px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.4px;
+}
+
 /* --- Footer --- */
 footer {
     position: relative;
