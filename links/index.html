@@ -121,11 +121,57 @@
         margin-top: 10px;
       }
 
+      /* The three outreach channels share one handle, so they read as a set
+         of icons with the handle stated once, rather than three rows each
+         repeating it. */
+      .socials {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .socials a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--bg-card);
+        color: var(--accent);
+        font-size: 1.35rem;
+        text-decoration: none;
+        transition: background var(--transition), border-color var(--transition),
+          transform var(--transition);
+      }
+
+      .socials a:hover,
+      .socials a:focus-visible {
+        background: var(--bg-card-hover);
+        border-color: var(--border-hover);
+        transform: translateY(-2px);
+      }
+
+      .socials a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .handle {
+        margin-top: 12px;
+        font-size: 0.92rem;
+        font-weight: 500;
+        color: var(--accent);
+        letter-spacing: 0.4px;
+      }
+
       .links {
         display: flex;
         flex-direction: column;
         gap: 12px;
-        margin-top: 32px;
+        margin-top: 28px;
       }
 
       .link {
@@ -226,6 +272,31 @@
         PhD, Caltech &middot; Incoming postdoc, UC San Diego
       </p>
 
+      <div class="socials">
+        <a
+          href="https://www.youtube.com/channel/UCjN8LudwVZM3V00HSObgPtg"
+          target="_blank"
+          rel="noopener"
+          aria-label="YouTube, @drpatrone"
+          ><i class="fa-brands fa-youtube"></i
+        ></a>
+        <a
+          href="https://www.instagram.com/drpatrone/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram, @drpatrone"
+          ><i class="fa-brands fa-instagram"></i
+        ></a>
+        <a
+          href="https://x.com/drpatrone"
+          target="_blank"
+          rel="noopener"
+          aria-label="X, @drpatrone"
+          ><i class="fa-brands fa-x-twitter"></i
+        ></a>
+      </div>
+      <p class="handle">@drpatrone</p>
+
       <nav class="links">
         <a class="link link--primary" href="https://samuelpatrone.com/">
           <i class="fa-solid fa-globe"></i>
@@ -236,33 +307,8 @@
           <i class="fa-solid fa-chevron-right chev"></i>
         </a>
 
-        <a
-          class="link"
-          href="https://www.youtube.com/channel/UCjN8LudwVZM3V00HSObgPtg"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-youtube"></i>
-          <span class="label">YouTube <span class="sub">@drpatrone</span></span>
-          <i class="fa-solid fa-chevron-right chev"></i>
-        </a>
 
-        <a
-          class="link"
-          href="https://www.instagram.com/drpatrone/"
-          target="_blank"
-          rel="noopener"
-        >
-          <i class="fa-brands fa-instagram"></i>
-          <span class="label">Instagram <span class="sub">@drpatrone</span></span>
-          <i class="fa-solid fa-chevron-right chev"></i>
-        </a>
 
-        <a class="link" href="https://x.com/drpatrone" target="_blank" rel="noopener">
-          <i class="fa-brands fa-x-twitter"></i>
-          <span class="label">X <span class="sub">@drpatrone</span></span>
-          <i class="fa-solid fa-chevron-right chev"></i>
-        </a>
 
         <a
           class="link"
