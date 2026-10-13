@@ -906,13 +906,67 @@
           Interested in research collaboration, a speaking invitation, or simply
           want to discuss physics? I&rsquo;d love to hear from you.
         </p>
+        <!-- Submissions go to Formspree, which emails them on; the site has
+             no server of its own. script.js sends it in place, and without
+             JavaScript it falls back to Formspree's own thank-you page. -->
+        <form
+          class="contact-form reveal"
+          id="contact-form"
+          action="https://formspree.io/f/xrpeyyvk"
+          method="POST"
+        >
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cf-name">Name</label>
+              <input
+                id="cf-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label for="cf-email">Email</label>
+              <input
+                id="cf-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="cf-subject">Subject</label>
+            <select id="cf-subject" name="subject">
+              <option>Research collaboration</option>
+              <option>Speaking invitation</option>
+              <option>Teaching</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" rows="6" required></textarea>
+          </div>
+          <!-- Honeypot: hidden from people, filled in by bots, and Formspree
+               drops any submission that has it. -->
+          <input
+            type="text"
+            name="_gotcha"
+            class="form-honeypot"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          <button type="submit" class="btn btn-primary form-submit">
+            <i class="fa-solid fa-paper-plane"></i> Send message
+          </button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+
         <div class="contact-buttons reveal">
-          <a
-            href="mailto:samuel@samuelpatrone.com"
-            class="btn btn-primary"
-          >
-            <i class="fa-solid fa-envelope"></i> samuel@samuelpatrone.com
-          </a>
           <a
             href="assets/resume.pdf"
             target="_blank"

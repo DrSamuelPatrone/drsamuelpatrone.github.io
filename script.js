@@ -460,6 +460,38 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // --- Contact form ---
+    // Sent in place so the visitor stays on the page; the form's own action
+    // still works if this never runs.
+    var contactForm = document.getElementById('contact-form');
+    if (contactForm && window.fetch) {
+        var formStatus = contactForm.querySelector('.form-status');
+        var formSubmit = contactForm.querySelector('.form-submit');
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            formSubmit.disabled = true;
+            formStatus.className = 'form-status';
+            formStatus.textContent = 'Sending…';
+
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: { Accept: 'application/json' }
+            }).then(function (res) {
+                if (!res.ok) throw new Error(res.status);
+                contactForm.reset();
+                formStatus.classList.add('is-success');
+                formStatus.textContent = 'Thanks! Your message is on its way, and I’ll get back to you soon.';
+            }).catch(function () {
+                formStatus.classList.add('is-error');
+                formStatus.textContent = 'Something went wrong. Please try again in a moment.';
+            }).then(function () {
+                formSubmit.disabled = false;
+            });
+        });
+    }
+
     function animateCounter(el) {
         var text = el.textContent.trim();
         var suffix = text.replace(/[0-9]/g, '');
