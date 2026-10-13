@@ -72,7 +72,7 @@
     <!-- ?v= must be bumped whenever style.css or script.js changes. Pages
          serves both with max-age=600, so without it a browser can pair new
          markup with a stale stylesheet and the layout falls apart. -->
-    <link rel="stylesheet" href="style.css?v=8" />
+    <link rel="stylesheet" href="style.css?v=10" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -183,45 +183,80 @@
           <span class="separator">&middot;</span>
           Postdoctoral Scholar at UC San Diego
         </p>
-        <!-- Academic and professional identifiers only. Social and outreach
-             accounts belong in the contact section, so the two rows do
-             different jobs rather than repeating each other. -->
+        <!-- Academic identifiers on the first row, outreach channels and
+             their shared handle on the second, so the two kinds of link stay
+             distinct. The outreach ones are repeated in the contact section's
+             follow block, so visitors who never scroll that far still see
+             them. -->
         <div class="hero-social">
-          <a
-            href="https://github.com/DrSamuelPatrone"
-            target="_blank"
-            rel="noopener"
-            aria-label="GitHub"
-            ><i class="fa-brands fa-github"></i
-          ></a>
-          <a
-            href="https://www.linkedin.com/in/DrSamuelPatrone/"
-            target="_blank"
-            rel="noopener"
-            aria-label="LinkedIn"
-            ><i class="fa-brands fa-linkedin"></i
-          ></a>
-          <a
-            href="https://scholar.google.com/citations?user=KCEy4HMAAAAJ&hl=en"
-            target="_blank"
-            rel="noopener"
-            aria-label="Google Scholar"
-            ><i class="ai ai-google-scholar"></i
-          ></a>
-          <a
-            href="https://inspirehep.net/authors/1878725"
-            target="_blank"
-            rel="noopener"
-            aria-label="INSPIRE-HEP"
-            ><i class="ai ai-inspire"></i
-          ></a>
-          <a
-            href="https://orcid.org/0000-0001-5319-2729"
-            target="_blank"
-            rel="noopener"
-            aria-label="ORCID"
-            ><i class="ai ai-orcid"></i
-          ></a>
+          <div class="hero-social-group">
+            <a
+              href="https://github.com/DrSamuelPatrone"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/DrSamuelPatrone/"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
+            <a
+              href="https://scholar.google.com/citations?user=KCEy4HMAAAAJ&hl=en"
+              target="_blank"
+              rel="noopener"
+              aria-label="Google Scholar"
+              ><i class="ai ai-google-scholar"></i
+            ></a>
+            <a
+              href="https://inspirehep.net/authors/1878725"
+              target="_blank"
+              rel="noopener"
+              aria-label="INSPIRE-HEP"
+              ><i class="ai ai-inspire"></i
+            ></a>
+            <a
+              href="https://orcid.org/0000-0001-5319-2729"
+              target="_blank"
+              rel="noopener"
+              aria-label="ORCID"
+              ><i class="ai ai-orcid"></i
+            ></a>
+          </div>
+          <div class="hero-social-group">
+            <a
+              href="https://www.youtube.com/channel/UCjN8LudwVZM3V00HSObgPtg"
+              target="_blank"
+              rel="noopener"
+              aria-label="YouTube, @drpatrone"
+              ><i class="fa-brands fa-youtube"></i
+            ></a>
+            <a
+              href="https://www.instagram.com/drpatrone/"
+              target="_blank"
+              rel="noopener"
+              aria-label="Instagram, @drpatrone"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a
+              href="https://www.tiktok.com/@drpatrone"
+              target="_blank"
+              rel="noopener"
+              aria-label="TikTok, @drpatrone"
+              ><i class="fa-brands fa-tiktok"></i
+            ></a>
+            <a
+              href="https://x.com/drpatrone"
+              target="_blank"
+              rel="noopener"
+              aria-label="X, @drpatrone"
+              ><i class="fa-brands fa-x-twitter"></i
+            ></a>
+          </div>
+          <p class="hero-handle">@drpatrone</p>
         </div>
       </div>
       <a href="#about" class="scroll-indicator" aria-label="Scroll down">
