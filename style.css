@@ -318,15 +318,6 @@ strong {
     gap: 20px;
 }
 
-.hero-handle {
-    /* Sits tight under the outreach row it names. */
-    margin-top: -8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.4px;
-}
-
 .hero-social a {
     color: var(--text-secondary);
     font-size: 1.3rem;
@@ -1472,11 +1463,7 @@ section#contact::before {
 
 /* --- Follow (outreach channels) --- */
 .follow {
-    margin-top: 48px;
-    padding-top: 36px;
-    /* Hairline above sets these apart from the identifiers, without
-       needing a second heading in the section. */
-    border-top: 1px solid var(--border);
+    margin-bottom: 40px;
 }
 
 .follow-label {
