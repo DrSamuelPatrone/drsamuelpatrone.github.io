@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Spotlight &mdash; Samuel Patrone</title>
+  <meta name="description" content="Samuel Patrone's Community Spotlight interview from This Week in Physics, the newsletter of the UC San Diego Department of Physics." />
+  <link rel="canonical" href="https://samuelpatrone.com/spotlight.html" />
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --paper: #f4efe4;
+      --paper-edge: #ece5d4;
+      --ink: #2a2521;
+      --ink-soft: #4a423b;
+      --rule: #b8a888;
+      --rule-light: #d8cdb4;
+      --navy: #182b49;
+      --gold: #c69214;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--paper-edge);
+    }
+
+    body {
+      font-family: 'EB Garamond', 'Georgia', serif;
+      background: var(--paper);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 56px 72px;
+      background: var(--paper);
+    }
+
+    /* Header */
+    .kicker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .kicker .line {
+      flex: 1;
+      max-width: 160px;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .kicker span.label {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.35rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    h1.title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      text-align: center;
+      letter-spacing: 0.01em;
+      color: var(--navy);
+      margin-bottom: 22px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 0 auto 22px;
+      max-width: 420px;
+    }
+
+    .divider .line {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .divider .diamond {
+      width: 7px;
+      height: 7px;
+      background: var(--rule);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .byline {
+      text-align: center;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--ink-soft);
+      margin-bottom: 44px;
+    }
+
+    /* Intro: portrait + identity */
+    .intro {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 44px;
+      align-items: center;
+      margin-bottom: 44px;
+    }
+
+    .portrait {
+      position: relative;
+      width: 240px;
+      height: 240px;
+    }
+
+    /* Gold crescent behind the photo, echoing the newsletter graphic */
+    .portrait::before {
+      content: '';
+      position: absolute;
+      inset: 6px -14px -14px 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .portrait img {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--navy);
+      background: #fff;
+    }
+
+    .identity .role {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .identity .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .identity p {
+      font-size: 1.08rem;
+      line-height: 1.5;
+    }
+
+    .identity dl {
+      margin-top: 12px;
+      font-size: 1.08rem;
+      line-height: 1.45;
+    }
+
+    .identity dt {
+      font-weight: 600;
+    }
+
+    .divider--mid {
+      margin: 0 auto 40px;
+      max-width: 900px;
+    }
+
+    /* Q&A */
+    .qa {
+      column-count: 2;
+      column-gap: 48px;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    .qa section {
+      break-inside: avoid-column;
+      margin-bottom: 1.6em;
+    }
+
+    .qa h2 {
+      font-family: 'EB Garamond', serif;
+      font-weight: 600;
+      font-size: 1.08rem;
+      line-height: 1.35;
+      color: var(--navy);
+      margin-bottom: 0.35em;
+    }
+
+    .qa a,
+    .identity a {
+      color: var(--navy);
+      text-decoration-color: var(--rule);
+      text-underline-offset: 2px;
+    }
+
+    .qa a:hover,
+    .qa a:focus-visible {
+      text-decoration-color: var(--navy);
+    }
+
+    .source {
+      margin-top: 8px;
+      text-align: center;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+    }
+
+    .divider--footer {
+      margin: 40px auto 0;
+      max-width: 420px;
+    }
+
+    .back-link {
+      display: block;
+      width: fit-content;
+      margin: 28px auto 0;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      border-color: var(--rule);
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        padding: 40px 22px 48px;
+      }
+
+      .intro {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 32px;
+        text-align: center;
+      }
+
+      .portrait {
+        width: 200px;
+        height: 200px;
+      }
+
+      .identity {
+        text-align: left;
+      }
+
+      .identity .role,
+      .identity .name {
+        text-align: center;
+      }
+
+      .identity .name {
+        font-size: 1.6rem;
+      }
+
+      .qa {
+        column-count: 1;
+      }
+
+      .kicker span.label {
+        font-size: 1.1rem;
+      }
+
+      .kicker .line {
+        max-width: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="kicker">
+      <span class="line"></span>
+      <span class="label">This Week in Physics</span>
+      <span class="line"></span>
+    </div>
+
+    <h1 class="title">Community Spotlight</h1>
+
+    <div class="divider">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+
+    <p class="byline">UC San Diego Department of Physics &middot; 26 October 2026</p>
+
+    <div class="intro">
+      <div class="portrait">
+        <img src="assets/profile.png" alt="Portrait of Samuel Patrone" width="460" height="460" />
+      </div>
+      <div class="identity">
+        <p class="role">Postdoctoral Scholar</p>
+        <p class="name">Samuel Patrone</p>
+        <p>
+          <strong>Samuel Patrone</strong> is a postdoctoral scholar working
+          with Professor Emeritus Aneesh Manohar.
+        </p>
+        <dl>
+          <dt>Department Field</dt>
+          <dd>Theoretical particle physics and cosmology</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="divider divider--mid">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+
+    <div class="qa">
+      <section>
+        <h2>Research Focus/Work</h2>
+        <p>I interrogate the universe about the fundamental laws of nature. So far, it has been reluctant to answer. As a theoretical particle physicist and cosmologist, I explore the earliest moments of cosmic history and questions such as what dark matter is, why there is more matter than antimatter, and how we might discover new particles or forces. What excites me most is turning theoretical ideas into predictions we can test in laboratories or by looking at the skies.</p>
+      </section>
+
+      <section>
+        <h2>What inspired you to pursue physics?</h2>
+        <p>I&rsquo;ve always been fascinated by humanity&rsquo;s effort to understand the world around us. A few fundamental principles can explain an extraordinary variety of phenomena, from neutron stars to the <a href="https://arxiv.org/abs/2501.00536" target="_blank" rel="noopener">delicate physics of cacio e pepe</a>. My eyes light up when a model makes predictions I can test, whether in a lab, among the stars, or in a pan of spaghetti.</p>
+      </section>
+
+      <section>
+        <h2>What&rsquo;s a challenge you&rsquo;ve faced and how did you overcome it?</h2>
+        <p>One challenge has been learning to keep making progress when there is no clear path to an answer. My PhD advisor, Mark B. Wise, taught me that even the most intimidating problems become approachable when you break them into small steps. Or, to quote another source of wisdom: &ldquo;<em>We live and we learn to take one step at a time; there&rsquo;s no need to rush, it&rsquo;s like learning to fly, or falling in love.</em>&rdquo; (Nevil, R., <em>et al.</em>)</p>
+      </section>
+
+      <section>
+        <h2>What&rsquo;s your favorite part about being in the department (or why did you choose to come to UCSD)?</h2>
+        <p>I&rsquo;m excited by all of the potential collaborations with my group here at UCSD, where a casual conversation can turn into an afternoon at the blackboard, working through a physics problem together. Since my spirit animal is an otter, I&rsquo;m also hoping to spend some time in the water and learn how to surf, so I can develop a more experimental understanding of waves.</p>
+      </section>
+
+      <section>
+        <h2>What&rsquo;s a fun fact about you?</h2>
+        <p>I&rsquo;m Italian, I enjoy making rag&ugrave; and tiramis&ugrave;, and my robot vacuum is named Feynman. His contributions to physics are limited, but his contributions to keeping my floors tidy are statistically significant.</p>
+      </section>
+
+      <section>
+        <h2>Any words of wisdom?</h2>
+        <p>&ldquo;<em>If my grandmother had wheels, she would have been a bike!</em>&rdquo; A vital reminder in theoretical physics: if you change your initial conditions to fit your conclusion, you are no longer modeling reality.</p>
+      </section>
+
+      <section>
+        <h2>Anything else you would like to share?</h2>
+        <p>I&rsquo;m excited to be joining the UCSD community and look forward to talking about the early universe or exchanging recipes; feel free to <a href="index.html#contact">get in touch</a> or swing by Mayer 4422 to say &ldquo;<em>Ciao!</em>&rdquo;.</p>
+      </section>
+    </div>
+
+    <p class="source">
+      Originally published in <em>This Week in Physics</em>, the newsletter of the
+      UC San Diego Department of Physics, 26 October 2026.
+    </p>
+
+    <div class="divider divider--footer">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+
+    <a class="back-link" href="index.html">&larr; Back to samuelpatrone.com</a>
+  </main>
+</body>
+</html>
